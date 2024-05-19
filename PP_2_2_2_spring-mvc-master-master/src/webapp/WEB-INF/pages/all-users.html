@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:c="http://java.sun.com/xml/ns/javaee">
+<head>
+    <meta charset="UTF-8">
+    <title>All Users</title>
+</head>
+<body>
+<h2>Users</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Gender</th>
+        <th>Operations</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <tr th:each="user : ${allUsers}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.gender}"></td>
+        <td>
+
+            <form th:action="@{/update}" method="get" style="display:inline;">
+                <input type="hidden" name="userId" th:value="${user.id}"/>
+                <button type="submit">Update</button>
+            </form>
+            <form th:action="@{/delete}" method="post" style="display:inline;">
+                <input type="hidden" name="userId" th:value="${user.id}"/>
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/add" class="btn btn-primary">Create new user</a>
+</body>
+</html>
